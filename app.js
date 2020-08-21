@@ -54,25 +54,19 @@ new Unicorn('Lena', 'purple', 'almonds');
 new Unicorn('Brad', 'sky-blue', 'ramen');
 new Unicorn('Uni', 'gray', 'swiss-chocolate');
 
-function onStart() {
+const onStart = () => {
   for (let i = 0; i < unicornList.length; i++) {
-    let barnUnicorn = document.createElement('li')
-    barnUnicorn.setAttribute('id', `${unicornList[i].name}`)
-    barnUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
-    barnAppend.appendChild(barnUnicorn);
+    $('#barn').append(`<li id="${unicornList[i].name}">${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}</li>`)
   }
   populateUniList();
   populateLocationList();
-  let formListner = document.getElementById('move-form')
-  formListner.addEventListener('submit', handleMove);
+  $('#move-form').on('submit', handleMove);
 }
 
-function handleMove(event) {
-  event.preventDefault();
-
+const handleMove = event => {
+  event.preventDefault()
   let eventName = event.target.unicorn_name.value;
   let eventLocation = event.target.location.value;
-
   if (eventLocation === 'barn') {
     moveToBarn(eventName)
   }
@@ -84,56 +78,43 @@ function handleMove(event) {
   }
 }
 
-function moveToTrails(name) {
-  let child = document.getElementById(name);
-  child.remove();
+const moveToTrails = name => {
+  $(`#${name}`).remove();
   for (let i = 0; i < unicornList.length; i++) {
     if (unicornList[i].name === name) {
       unicornList[i].currentLocation = 'trails'
-      let trailsUnicorn = document.createElement('li')
-      trailsUnicorn.setAttribute('id', `${name}`)
-      trailsUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
-      trailsAppend.appendChild(trailsUnicorn)
+      $('#trail').append(`<li id="${unicornList[i].name}">${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}</li>`)
     }
   }
 }
 
-function moveToPasture(name) {
-  let child = document.getElementById(name);
-  child.remove();
+const moveToPasture = name => {
+  $(`#${name}`).remove();
   for (let i = 0; i < unicornList.length; i++) {
     if (unicornList[i].name === name) {
       unicornList[i].currentLocation = 'pasture'
-      let pastureUnicorn = document.createElement('li')
-      pastureUnicorn.setAttribute('id', `${name}`)
-      pastureUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
-      pastureAppend.appendChild(pastureUnicorn)
+      $('#pasture').append(`<li id="${unicornList[i].name}">${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}</li>`)
     }
   }
 }
 
-function moveToBarn(name) {
-  let child = document.getElementById(name);
-  child.remove();
+const moveToBarn = name => {
+  $(`#${name}`).remove();
   for (let i = 0; i < unicornList.length; i++) {
     if (unicornList[i].name === name) {
       unicornList[i].currentLocation = 'barn'
-      let barnUnicorn = document.createElement('li')
-      barnUnicorn.setAttribute('id', `${name}`)
-      barnUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
-      barnAppend.appendChild(barnUnicorn)
+      $('#barn').append(`<li id="${unicornList[i].name}">${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}</li>`)
     }
   }
 }
 
-function populateUniList() {
+const populateUniList = () => {
   unicornList.forEach(name => {
-    let newOption = `<option value="${name.name}">${name.name}</option>`
-    $('#uni_list').append(newOption)
+    $('#uni_list').append(`<option value="${name.name}">${name.name}</option>`)
   })
 }
 
-function populateLocationList() {
+const populateLocationList = () => {
   $('#location_list').append('<option value="barn">Barn</option>')
   $('#location_list').append('<option value="pasture">The Pasture</option>')
   $('#location_list').append('<option value="trails">Out on the Trails!</option>')
