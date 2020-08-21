@@ -20,12 +20,20 @@
   </ul>
 
   <form id="move-form">
-    <input type="text" name="unicorn_name" />
-    <input type="text" name="location" />
+    <!-- <input type="text" name="unicorn_name" />
+    <input type="text" name="location" /> -->
+    <label for="unicorn_name">Pick your Unicorn!</label>
+    <select id="uni_list" name="unicorn_name" required>
+      <option value="">Select from the magic list!</option>
+    </select>
+    <label for="location_list">What adventure awaits us?</label>
+    <select id="location_list" name="location" required>
+      <option value="">Select from the kindoms list!</option>
+    </select>
     <button type="submit">Move the Unicorn!</button>
   </form>
 
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="app.js"></script>
 </body>
 

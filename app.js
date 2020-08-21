@@ -4,13 +4,15 @@ console.log('connected')
 /*
 Unicorn Ranch
 
-They would like to be able to see which unicorns are where at a glance.
+As ranch hands, we would like to be able to see which unicorns are where at a glance.
 
 
 Properties:
 
 color
 location
+favorite food
+*optional* current location. Not required, but I feel like the prop will help when we get to databases.
 
 
 3 locations
@@ -26,10 +28,6 @@ no real set interval
 
 */
 
-let barn = [];
-let pasture = [];
-let trails = [];
-
 let unicornList = [];
 let barnAppend = document.getElementById('barn');
 let pastureAppend = document.getElementById('pasture');
@@ -39,8 +37,8 @@ function Unicorn(name, color, favoriteFood) {
   this.name = name;
   this.color = color;
   this.favoriteFood = favoriteFood;
+  this.currentLocation = 'barn'
   unicornList.push(this);
-  barn.push(this)
 }
 
 new Unicorn('Sparkles', 'purple', 'carrots');
@@ -56,18 +54,18 @@ new Unicorn('Lena', 'purple', 'almonds');
 new Unicorn('Brad', 'sky-blue', 'ramen');
 new Unicorn('Uni', 'gray', 'swiss-chocolate');
 
-
-
-for (let i = 0; i < barn.length; i++) {
-  let barnUnicorn = document.createElement('li')
-  barnUnicorn.setAttribute('id', `${barn[i].name}`)
-  barnUnicorn.textContent = `${barn[i].name} ${barn[i].color} ${barn[i].favoriteFood}`;
-  barnAppend.appendChild(barnUnicorn);
+function onStart() {
+  for (let i = 0; i < unicornList.length; i++) {
+    let barnUnicorn = document.createElement('li')
+    barnUnicorn.setAttribute('id', `${unicornList[i].name}`)
+    barnUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
+    barnAppend.appendChild(barnUnicorn);
+  }
+  populateUniList();
+  populateLocationList();
+  let formListner = document.getElementById('move-form')
+  formListner.addEventListener('submit', handleMove);
 }
-//need to grab form id to add listener to
-
-let formListner = document.getElementById('move-form')
-formListner.addEventListener('submit', handleMove);
 
 function handleMove(event) {
   event.preventDefault();
@@ -91,6 +89,7 @@ function moveToTrails(name) {
   child.remove();
   for (let i = 0; i < unicornList.length; i++) {
     if (unicornList[i].name === name) {
+      unicornList[i].currentLocation = 'trails'
       let trailsUnicorn = document.createElement('li')
       trailsUnicorn.setAttribute('id', `${name}`)
       trailsUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
@@ -100,12 +99,11 @@ function moveToTrails(name) {
 }
 
 function moveToPasture(name) {
-  console.log(name)
   let child = document.getElementById(name);
   child.remove();
   for (let i = 0; i < unicornList.length; i++) {
-    console.log('move to past', unicornList[i], name)
     if (unicornList[i].name === name) {
+      unicornList[i].currentLocation = 'pasture'
       let pastureUnicorn = document.createElement('li')
       pastureUnicorn.setAttribute('id', `${name}`)
       pastureUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
@@ -113,11 +111,13 @@ function moveToPasture(name) {
     }
   }
 }
+
 function moveToBarn(name) {
   let child = document.getElementById(name);
   child.remove();
   for (let i = 0; i < unicornList.length; i++) {
     if (unicornList[i].name === name) {
+      unicornList[i].currentLocation = 'barn'
       let barnUnicorn = document.createElement('li')
       barnUnicorn.setAttribute('id', `${name}`)
       barnUnicorn.textContent = `${unicornList[i].name} ${unicornList[i].color} ${unicornList[i].favoriteFood}`;
@@ -126,10 +126,23 @@ function moveToBarn(name) {
   }
 }
 
+function populateUniList() {
+  unicornList.forEach(name => {
+    let newOption = `<option value="${name.name}">${name.name}</option>`
+    $('#uni_list').append(newOption)
+  })
+}
 
+function populateLocationList() {
+  $('#location_list').append('<option value="barn">Barn</option>')
+  $('#location_list').append('<option value="pasture">The Pasture</option>')
+  $('#location_list').append('<option value="trails">Out on the Trails!</option>')
+}
+
+onStart();
 
 /*
-Finish the basic concept
+Finish the basic concept....    DONE
 
 need to work on typing speed
 
