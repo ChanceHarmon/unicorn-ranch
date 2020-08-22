@@ -76,6 +76,7 @@ const handleMove = event => {
   if (eventLocation === 'trails') {
     moveToTrails(eventName);
   }
+  talkToServer(event);
 }
 
 const moveToTrails = name => {
@@ -118,6 +119,28 @@ const populateLocationList = () => {
   $('#location_list').append('<option value="barn">Barn</option>')
   $('#location_list').append('<option value="pasture">The Pasture</option>')
   $('#location_list').append('<option value="trails">Out on the Trails!</option>')
+}
+
+const talkToServer = (event) => {
+  event.preventDefault();
+  let uniMoving = $('#uni_list').val();
+  let uniHome = $('#location_list').val();
+  console.log(uniMoving)
+  const params = {
+    method: 'GET',
+    data: {
+      name: uniMoving,
+      location: uniHome
+    },
+  };
+  $.ajax('http://localhost:3000/update', params)
+    .then(() => {
+      console.log('we hit the server')
+      //console.log(result)
+    })
+    .catch(error => {
+      console.log(error)
+    })
 }
 
 onStart();
