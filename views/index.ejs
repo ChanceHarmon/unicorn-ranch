@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicorn Ranch</title>
+
+</head>
+
+<body>
+
+  <h1>Welcome to Unicorn Ranch, where all your wildest dreams come true!!!</h1>
+
+
+  <h1>Barn</h1>
+  <ul id="barn">
+    <% result.forEach(unicorn => { %>
+    <%  if(unicorn.current_location === 'barn') { %>
+    <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
+      <%= unicorn.favorite_food %></li>
+    <% } %>
+    <% }) %>
+  </ul>
+  <h1>Pasture</h1>
+  <ul id="pasture">
+    <% result.forEach(unicorn => { %>
+    <%  if(unicorn.current_location === 'pasture') { %>
+    <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
+      <%= unicorn.favorite_food %></li>
+    <% } %>
+    <% }) %>
+  </ul>
+  <h1>Trails</h1>
+  <ul id="trail">
+    <% result.forEach(unicorn => { %>
+    <%  if(unicorn.current_location === 'trails') { %>
+    <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
+      <%= unicorn.favorite_food %></li>
+    <% } %>
+    <% }) %>
+  </ul>
+
+
+  <% result.forEach( listItem => { %>
+
+  <form id="move-form" action="/update/<%= listItem.id %>?_method=PUT" method='post'>
+    <label for="location_list">What adventure awaits <%= listItem.name %>?</label>
+    <input type="hidden" name="name" value="<%= listItem.name %>">
+    <input type="hidden" name="color" value="<%= listItem.color %>">
+    <input type="hidden" name="favorite_food" value="<%= listItem.favorite_food %>">
+    <select id="location_list" name="location" required>
+      <option value="">Select from the kingdom list!</option>
+      <% if(listItem.current_location === 'barn'){ %>
+      <option value="pasture">Move to the Pasture!</option>
+      <option value="trails">Move out to the Trails!</option>
+      <%  } else if(listItem.current_location === 'pasture'){ %>
+      <option value="barn">Move back to the Barn!</option>
+      <option value="trails">Move out to the Trails!</option>
+      <%  } else { %>
+      <option value="barn">Move back to the Barn!</option>
+      <option value="pasture">Move to the Pasture!</option>
+      <% } %>
+    </select>
+    <button type="submit">Move the Unicorn!</button>
+  </form>
+  <% }) %>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

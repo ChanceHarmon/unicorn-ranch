@@ -19,4 +19,4 @@ INSERT INTO stable (name, color, favorite_food, current_location) VALUES ('Adam'
 INSERT INTO stable (name, color, favorite_food, current_location) VALUES ('Brook', 'chartruse', 'lucky-charms', 'barn');
 INSERT INTO stable (name, color, favorite_food, current_location) VALUES ('Lena', 'purple', 'almonds', 'barn');
 INSERT INTO stable (name, color, favorite_food, current_location) VALUES ('Brad', 'sky-blue', 'ramen', 'barn');
-INSERT INTO stable (name, color, favorite_food, current_location) VALUES ('Uni', 'gray', 'swiss-chocolate', 'barn');
+INSERT INTO stable (name, color, favorite_food, current_location) VALUES ('Rosey', 'pink', 'pop-corn', 'barn');

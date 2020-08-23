@@ -4,41 +4,43 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const pg = require('pg')
+const fs = require('fs');
 const methodOverride = require('method-override');
+const path = require('path');
 
 const PORT = process.env.PORT;
 
 const client = new pg.Client(process.env.DATABASE_URL);
 client.on('error', error => console.error(error));
 
+app.set('view engine', 'ejs');
+app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(express.static('public'));
 
 
 
 
 app.get('/', (request, response) => {
-  console.log('home route')
+  //console.log('home route', request)
   const SQL = 'SELECT * FROM stable;';
   client.query(SQL)
     .then(result => {
-      console.log(result.rows);
-      //response.send({ currentLocations: result.rows });
+      //console.log(result.rows);
+      response.render('index', { result: result.rows });
     })
     .catch('error', error => {
       console.error(error)
     })
 })
 
-app.get('/update', (request, response) => {
-  console.log(request.query)
-  let { name, location } = request.query;
-  console.log(name)
-  //const SQL = `SELECT name FROM stable WHERE name='${name}';`;
-  const SQL = 'SELECT * FROM stable;';
-  client.query(SQL)
-    .then(result => {
+app.put('/update/:id', (request, response) => {
+  let { name, location, color, favorite_food } = request.body;
+  let id = request.params.id;
+  let SQL = `UPDATE stable SET name=$1, color=$2, favorite_food=$3, current_location=$4 WHERE id=$5;`;
+  let safeValues = [name, color, favorite_food, location, id]
+  client.query(SQL, safeValues)
+    .then(() => {
       // console.log(result.rows);
       response.redirect('/')
     })
