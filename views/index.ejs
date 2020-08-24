@@ -5,43 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unicorn Ranch</title>
-
+  <!-- <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/base.css"> -->
 </head>
 
 <body>
 
   <h1>Welcome to Unicorn Ranch, where all your wildest dreams come true!!!</h1>
 
+  <div id="wrapper">
+    <h2>Barn</h2>
+    <ul id="barn">
+      <% result.forEach(unicorn => { %>
+      <%  if(unicorn.current_location === 'barn') { %>
+      <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
+        <%= unicorn.favorite_food %></li>
+      <% } %>
+      <% }) %>
+    </ul>
+    <h2>Pasture</h2>
+    <ul id="pasture">
+      <% result.forEach(unicorn => { %>
+      <%  if(unicorn.current_location === 'pasture') { %>
+      <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
+        <%= unicorn.favorite_food %></li>
+      <% } %>
+      <% }) %>
+    </ul>
+    <h2>Trails</h2>
+    <ul id="trail">
+      <% result.forEach(unicorn => { %>
+      <%  if(unicorn.current_location === 'trails') { %>
+      <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
+        <%= unicorn.favorite_food %></li>
+      <% } %>
+      <% }) %>
+    </ul>
 
-  <h1>Barn</h1>
-  <ul id="barn">
-    <% result.forEach(unicorn => { %>
-    <%  if(unicorn.current_location === 'barn') { %>
-    <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
-      <%= unicorn.favorite_food %></li>
-    <% } %>
-    <% }) %>
-  </ul>
-  <h1>Pasture</h1>
-  <ul id="pasture">
-    <% result.forEach(unicorn => { %>
-    <%  if(unicorn.current_location === 'pasture') { %>
-    <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
-      <%= unicorn.favorite_food %></li>
-    <% } %>
-    <% }) %>
-  </ul>
-  <h1>Trails</h1>
-  <ul id="trail">
-    <% result.forEach(unicorn => { %>
-    <%  if(unicorn.current_location === 'trails') { %>
-    <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
-      <%= unicorn.favorite_food %></li>
-    <% } %>
-    <% }) %>
-  </ul>
-
-
+  </div>
   <% result.forEach( listItem => { %>
 
   <form id="move-form" action="/update/<%= listItem.id %>?_method=PUT" method='post'>
