@@ -51,7 +51,6 @@ const backInTheBarn = () => {
   client.query(SQL)
     .then(data => {
       data.rows.forEach(unicorn => {
-        console.log(unicorn, 'timeout')
         let backInTheBarnSQL = 'UPDATE stable SET name=$1, color=$2, favorite_food=$3, current_location=$4 WHERE id=$5;';
         let safeValues = [unicorn.name, unicorn.color, unicorn.favorite_food, 'barn', unicorn.id];
         client.query(backInTheBarnSQL, safeValues)
