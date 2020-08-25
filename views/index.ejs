@@ -47,7 +47,6 @@
 
   </div>
   <% result.forEach( listItem => { %>
-
   <form id="move-form" action="/update/<%= listItem.id %>?_method=PUT" method='post'>
     <label for="location_list">What adventure awaits <%= listItem.name %>?</label>
     <input type="hidden" name="name" value="<%= listItem.name %>">
@@ -68,6 +67,7 @@
     </select>
     <button type="submit">Move the Unicorn!</button>
   </form>
+
   <% }) %>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
