@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unicorn Ranch</title>
-  <!-- <link rel="stylesheet" href="styles/reset.css">
-  <link rel="stylesheet" href="styles/base.css"> -->
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/base.css">
 </head>
 
 <body>
@@ -14,9 +14,9 @@
   <h1>Welcome to Unicorn Ranch, where all your wildest dreams come true!!!</h1>
 
   <div id="wrapper">
-    <h2>Barn</h2>
-    <img src="../assets/barn.jpg" alt"Unicorn Barn" />
-    <ul id="barn">
+    <img id="barn-pic" src="../assets/barn.jpg" alt="Unicorn Barn" />
+    <h2 id="barn-title">Barn</h2>
+    <ul id="barn-ul">
       <% result.forEach(unicorn => { %>
       <%  if(unicorn.current_location === 'barn') { %>
       <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
@@ -24,8 +24,9 @@
       <% } %>
       <% }) %>
     </ul>
-    <h2>Pasture</h2>
-    <ul id="pasture">
+    <img id="pasture-pic" src="../assets/pasture.jpg" alt="Unicorn Pasture" />
+    <h2 id="pasture-title">Pasture</h2>
+    <ul id="pasture-ul">
       <% result.forEach(unicorn => { %>
       <%  if(unicorn.current_location === 'pasture') { %>
       <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
@@ -33,8 +34,9 @@
       <% } %>
       <% }) %>
     </ul>
-    <h2>Trails</h2>
-    <ul id="trail">
+    <img id="trails-pic" src="../assets/trails.jpg" alt="Unicorn Trails" />
+    <h2 id="trails-title">Trails</h2>
+    <ul id="trails-ul">
       <% result.forEach(unicorn => { %>
       <%  if(unicorn.current_location === 'trails') { %>
       <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
