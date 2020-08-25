@@ -1,3 +1,14 @@
+**To run Locally**
+ - Git clone
+ - npm install
+ - nodemon/ node server.js
+ 
+**To Try the Live Version**
+
+  - Go to https://unicorn-ranch-2020.herokuapp.com/
+  - Move a Unicorn
+  - Check back soon to see if anyone else took one our for a ride!
+  
 Number and name of feature: Functionality
 
 Estimate of time needed to complete: 2.5 hours
