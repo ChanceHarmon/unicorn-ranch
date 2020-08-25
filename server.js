@@ -4,10 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const pg = require('pg')
-const fs = require('fs');
 const methodOverride = require('method-override');
-const path = require('path');
-const { response } = require('express');
 
 const PORT = process.env.PORT;
 

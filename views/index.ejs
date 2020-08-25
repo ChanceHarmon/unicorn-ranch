@@ -19,8 +19,10 @@
     <ul id="barn-ul">
       <% result.forEach(unicorn => { %>
       <%  if(unicorn.current_location === 'barn') { %>
-      <li>Unicorn Name: <%=unicorn.name%> Unicorns Color: <%= unicorn.color %> Unicorns Favorite Food:
-        <%= unicorn.favorite_food %></li>
+      <li>Unicorn Name: <%=unicorn.name%></li>
+      <li>Unicorns Color: <%= unicorn.color %></li>
+      <li>Unicorns Favorite Food: <%= unicorn.favorite_food %></li>
+      <br />
       <% } %>
       <% }) %>
     </ul>
